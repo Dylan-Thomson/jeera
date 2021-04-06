@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from "react";
 
-const ListItem = ({ task, list, setList }) => {
+const ListItem = ({ task, deleteItem }) => {
   const [done, setDone] = useState(false);
 
   return (
     <li>
       <span>{task}</span>
       <input type="checkbox" onClick={toggleDone} />
-      <button type="button" onClick={handleDelete}>
+      <button type="button" onClick={deleteItem}>
         Delete
       </button>
     </li>
@@ -15,11 +15,8 @@ const ListItem = ({ task, list, setList }) => {
 
   function toggleDone() {
     setDone(!done);
+    // setDone does not change done in the scope of this function, not sure why
     done || alert(`FINISHED ${task}`);
-  }
-
-  function handleDelete() {
-    setList(list.filter(todo => todo !== task));
   }
 };
 

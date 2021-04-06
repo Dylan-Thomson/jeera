@@ -8,15 +8,14 @@ const initialState = [
 const TodoList = ({ todos }) => {
   const [list, setList] = useState(initialState);
 
-//   useMemo(() => {
-//       setList(todos);
-//   }, [todos])
 
   return (
     <ol>
-        {list.map(item => (
-            <ListItem task={item} setList={setList} list={list}/>
-        ))}
+        {list.map(item => {
+            const deleteItem = () => setList(list.filter(row => row !== item));
+            return <ListItem task={item} deleteItem={deleteItem}/>
+        }
+        )}
     </ol>
   );
 
