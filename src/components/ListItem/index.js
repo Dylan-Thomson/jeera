@@ -7,13 +7,16 @@ const ListItem = ({ task, deleteItem, status }) => {
   return (
     <li>
       <span>{task}</span>
-      {status === TaskStateEnum.TODO && (
+      {status !== TaskStateEnum.TODO && (
+        <button type="button">Move to TODO</button>
+      )}
+      {status !== TaskStateEnum.INPROGRESS && (
         <button type="button">Move to INPROGRESS</button>
       )}
-      {status === TaskStateEnum.INPROGRESS && (
+      {status !== TaskStateEnum.DONE && (
         <button type="button">Move to DONE</button>
       )}
-      <button type="button" onClick={() => deleteItem(task)}>
+      <button type="button" onClick={deleteItem}>
         Delete
       </button>
     </li>

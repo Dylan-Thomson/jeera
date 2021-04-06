@@ -1,16 +1,24 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import ListItem from "../ListItem";
-import TaskStateEnum from "../../constants/taskStateEnum";
 
-const TodoList = ({ todos, listType }) => {
+const TodoList = ({ todos, listType, setLists }) => {
   const [list, setList] = useState(todos);
+
+  useEffect(() => {
+    setLists((prev) => {
+      prev[listType] = list;
+      return prev;
+    });
+  }, [list]);
 
   return (
     <>
       <h2>{listType}</h2>
       <ol>
         {list.map((item, i) => {
-          const deleteItem = () => setList(list.filter((row) => row !== item));
+          const deleteItem = () => {
+            setList(list.filter((row) => row !== item));
+          };
           return (
             <ListItem
               key={i}
