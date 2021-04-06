@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from "react";
+import React, { useState } from "react";
 import ListItem from "../ListItem";
 
 const initialState = [
@@ -11,9 +11,9 @@ const TodoList = ({ todos }) => {
 
   return (
     <ol>
-        {list.map(item => {
+        {list.map((item, i) => {
             const deleteItem = () => setList(list.filter(row => row !== item));
-            return <ListItem task={item} deleteItem={deleteItem}/>
+            return <ListItem key={i} task={item} deleteItem={deleteItem}/>
         }
         )}
     </ol>

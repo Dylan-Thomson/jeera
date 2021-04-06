@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 
 const ListItem = ({ task, deleteItem }) => {
   const [done, setDone] = useState(false);
