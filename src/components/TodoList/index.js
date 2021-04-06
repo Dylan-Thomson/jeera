@@ -1,19 +1,21 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useMemo } from "react";
 import ListItem from "../ListItem";
 
+const initialState = [
+    "Come up with a better idea.",
+    "Feed cats",
+  ];
 const TodoList = ({ todos }) => {
-  const [list, setList] = useState([]);
+  const [list, setList] = useState(initialState);
 
-    // Similar to componentDidMount and componentDidUpdate:
-    useEffect(() => {
-      // Update the document title using the browser API
-      setList(todos);
-    });
+//   useMemo(() => {
+//       setList(todos);
+//   }, [todos])
 
   return (
     <ol>
         {list.map(item => (
-            <ListItem task={item}/>
+            <ListItem task={item} setList={setList} list={list}/>
         ))}
     </ol>
   );
