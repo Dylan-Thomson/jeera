@@ -12,6 +12,8 @@ initialLists[TaskStateEnum.INPROGRESS] = ["Create Jeera App"];
 initialLists[TaskStateEnum.DONE] = ["Go to work", "Eat Lunch", "Order Dinner"];
 
 const TodoBoard = () => {
+  // TODO useState is meant for more simple values
+  // Look into useReducer to manage this lists object
   const [lists, setLists] = useState(initialLists);
 
   // useEffect(() => {
@@ -27,6 +29,7 @@ const TodoBoard = () => {
         };
         return (
           <TodoList
+            // Key set to a TaskStateEnum - there will only be one of each
             key={key}
             todos={lists[key]}
             listType={key}
