@@ -1,15 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import ListItem from "../ListItem";
 
-const TodoList = ({ todos, listType, setLists }) => {
+const TodoList = ({ todos, listType, updateLists }) => {
   const [list, setList] = useState(todos);
-
-  useEffect(() => {
-    setLists((prev) => {
-      prev[listType] = list;
-      return prev;
-    });
-  }, [list]);
 
   return (
     <>
@@ -17,7 +10,10 @@ const TodoList = ({ todos, listType, setLists }) => {
       <ol>
         {list.map((item, i) => {
           const deleteItem = () => {
-            setList(list.filter((row) => row !== item));
+            // Update this state and the todoboard state (maybe just pass the entire lists object)
+            const newList = list.filter(row => row !== item);
+            setList(newList);
+            updateLists(newList);
           };
           return (
             <ListItem

@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import TodoList from "../TodoList";
 import TaskStateEnum from "../../constants/taskStateEnum";
 
@@ -14,15 +14,27 @@ initialLists[TaskStateEnum.DONE] = ["Go to work", "Eat Lunch", "Order Dinner"];
 const TodoBoard = () => {
   const [lists, setLists] = useState(initialLists);
 
-  useEffect(() => {
-      console.log(lists);
-  }, [lists]);
+  // useEffect(() => {
+  //   console.log(lists);
+  // });
 
   return (
     <section>
       {Object.keys(lists).map((key, i) => {
-        return <TodoList key={key} todos={lists[key]} listType={key} setLists={setLists}/>;
+        const updateLists = (newList) => {
+          lists[key] = newList;
+          setLists(lists);
+        };
+        return (
+          <TodoList
+            key={key}
+            todos={lists[key]}
+            listType={key}
+            updateLists={updateLists}
+          />
+        );
       })}
+      <button onClick={() => console.log(lists)}>Console log board state for testing</button>
     </section>
   );
 };
